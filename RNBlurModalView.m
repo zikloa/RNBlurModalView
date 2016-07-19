@@ -147,6 +147,7 @@ typedef void (^RNBlurCompletion)(void);
         [_dismissButton addTarget:self action:@selector(hide) forControlEvents:UIControlEventTouchUpInside];
         
         self.alpha = 0.f;
+        self.finalAlpha = 1.0f;
         self.backgroundColor = [UIColor clearColor];
 //        self.backgroundColor = [UIColor redColor];
 //        self.layer.borderWidth = 2.f;
@@ -331,7 +332,7 @@ typedef void (^RNBlurCompletion)(void);
         
         self.transform = CGAffineTransformScale(CGAffineTransformIdentity, 0.4, 0.4);
         [UIView animateWithDuration:self.animationDuration animations:^{
-            _blurView.alpha = 1.f;
+            _blurView.alpha = self.finalAlpha;
             self.alpha = 1.f;
             self.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1.f, 1.f);
         } completion:^(BOOL finished) {
@@ -697,7 +698,7 @@ typedef void (^RNBlurCompletion)(void);
     //clean up
     CGContextRelease(ctx);
     CGColorSpaceRelease(colorSpace);
-    free(pixelBuffer2)
+    free(pixelBuffer2);
     free(pixelBuffer);
     CFRelease(inBitmapData);
     

@@ -38,6 +38,7 @@ extern NSString * const kRNBlurDidHidewNotification;
 @property (assign) UIViewAnimationOptions animationOptions;
 @property (assign) BOOL dismissButtonRight;
 @property (nonatomic, copy) void (^defaultHideBlock)(void);
+@property (assign) CGFloat finalAlpha;
 
 - (id)initWithViewController:(UIViewController*)viewController view:(UIView*)view;
 - (id)initWithViewController:(UIViewController*)viewController title:(NSString*)title message:(NSString*)message;
