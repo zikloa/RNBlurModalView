@@ -411,7 +411,9 @@ typedef void (^RNBlurCompletion)(void);
 - (void)autoHeight {
     CGRect frame = self.frame;
     CGSize maxSize = CGSizeMake(frame.size.width, 9999);
-    CGSize expectedSize = [self.text sizeWithFont:self.font constrainedToSize:maxSize lineBreakMode:self.lineBreakMode];
+    NSMutableParagraphStyle *style = [NSMutableParagraphStyle defaultParagraphStyle].mutableCopy;
+    style.lineBreakMode = self.lineBreakMode;
+    CGSize expectedSize = [self.text boundingRectWithSize:maxSize options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:self.font, NSParagraphStyleAttributeName:style} context:nil].size;
     frame.size.height = expectedSize.height;
     [self setFrame:frame];
 }
